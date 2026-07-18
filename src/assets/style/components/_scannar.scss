@@ -1,0 +1,12 @@
+.qr-reader {
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  height: 100%;
+}
+.qr-reader video {
+  object-fit: cover;
+  height: 100%;
+}

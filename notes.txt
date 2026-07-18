@@ -1,0 +1,91 @@
+1- Need to make in app layout if user not sign in to go landing
+2- focus on no one can see route for other one
+3- test delete user
+4- test expire token and invalid
+5- sidebar not pixel perfect
+
+=======
+future
+======
+
+ => I have this error     "detail": "User is inactive", but login doesn't give me error for activation to redirect user to activation
+=>Hut dropdown wanna it for admin and supplier
+
+
+
+===============
+frontend 
+==============
+
+
+=> hut flow
+1- In future add validation if he alreay set this range of date
+=>Event flow
+4- In future to validate this date already exist or not
+===============
+Backend 
+==============
+
+
+=> Order flow
+
+2- order details 
+2.1 total price is wrong
+
+=>Qr flow
+1- need endpoint for all logs of qrs
+
+
+=> home page
+
+1-latest order 
+1.1- have an error not working
+ 1.1- need search by hut title, and filter with price and status
+
+
+=> Content 
+1- our services
+  1- add new 2 fields are title, title_ar
+
+
+
+====================
+=> today to do
+====================
+1- event flow=> need backend adjust supplier details error to check then done 
+2- hut flow ✅
+3- order flow ✅
+
+
+
+
+=================
+=> Done 
+=================
+1- product flow
+2- Feedback flow
+3- supplier flow
+4- user flow
+5- Ken special item flow
+6- Event flow
+7- Order flow
+8- hut flow
+
+======================
+=> Remaning
+======================
+1- Home for both
+2- Billing
+3-hut => details
+
+
+==================
+=> working on 
+==================
+1- event 
+
+
+----------------------
+1- change invitation email url to this https://ken.mernantech.com/account/login this is front end login page url
+
+2- add filter by name at this endpoint /support/

@@ -1,0 +1,35 @@
+body {
+  font-family: var(--font-blinker) !important;
+  overflow-x: hidden;
+}
+
+// start button compoennt
+.button_shadow {
+  box-shadow: 0px 1px 3px 1px #00000026, 0px 1px 2px 0px #0000004d;
+}
+// end button compoennt
+
+.flex_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex_center_y {
+  display: flex;
+  align-items: center;
+}
+
+.main_shadow {
+  box-shadow: 0px 18px 32px 0px #d0d2da26;
+}
+
+.page {
+  @extend .main_shadow;
+  background: white;
+  border: 2px solid #fffaf4;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}

@@ -1,0 +1,96 @@
+@use "../layout/font";
+
+// ==============================
+// Multiselect Root
+// ==============================
+.p-multiselect {
+  height: 45px;
+  @media (min-width: 745px) {
+    height: 57px;
+  }
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--color-grey-400);
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  -ms-border-radius: 14px;
+  -o-border-radius: 14px;
+  box-shadow: none !important;
+
+  &.p-inputwrapper-focus {
+    border: 1px solid var(--color-secondary);
+  }
+
+  &-label {
+    padding: 8px;
+    @media (min-width: 745px) {
+      padding: 12px !important;
+    }
+    text-wrap: wrap;
+    color: var(--color-grey-500);
+    @extend .body_lg;
+
+    &.p-placeholder {
+      color: var(--color-grey-300);
+    }
+  }
+}
+
+// ==============================
+// Multiselect Panel
+// ==============================
+.p-multiselect-panel {
+  .p-multiselect-items {
+    .p-multiselect-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      white-space: normal;
+      overflow: hidden;
+      word-break: break-word;
+      @media (min-width: 745px) {
+        padding: 12px !important;
+      }
+      color: #6a6a6d !important;
+      background: #fff;
+      outline: none !important;
+      color: var(--color-on-surface-secondary-variant);
+      @extend .body_lg;
+
+      &:not(.p-highlight):not(.p-disabled).p-focus {
+        background: var(--color-gray-50) !important;
+      }
+
+      &.p-highlight {
+        background: var(--color-light) !important;
+      }
+    }
+  }
+}
+
+// ==============================
+// Multiselect Header / Filter
+// ==============================
+.p-multiselect-header {
+  gap: 8px;
+  background: #fff;
+
+  .p-multiselect-filter {
+    height: 48px;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid var(--color-grey-400);
+    outline: none;
+    box-shadow: none;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+    &:focus {
+      border: 1px solid var(--color-secondary);
+    }
+  }
+}

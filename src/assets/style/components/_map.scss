@@ -1,0 +1,28 @@
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+
+.map_container {
+  height: 332px;
+  width: 100%;
+}
+.map_container .map {
+  width: 100%;
+  height: 100%;
+  position: relative !important;
+  outline: none !important;
+}
+.leaflet-container {
+  height: 100%;
+  z-index: 1;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: white;
+}
+.leaflet-container .leaflet-marker-pane img {
+  cursor: grab;
+}
+.leaflet-container {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

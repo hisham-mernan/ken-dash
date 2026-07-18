@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+@mixin typography($size, $line-height) {
+  font-size: $size;
+  line-height: $line-height;
+}
+.body_lg {
+  @include typography(14px, 20px);
+
+  @media (min-width: 600px) {
+    @include typography(16px, 24px);
+  }
+}
+.body_sm {
+  @include typography(14px, 20px);
+}
+.headline_md {
+  @include typography(28px, 36px);
+}
+.headline_xl {
+  @include typography(28px, 36px);
+  @media (min-width: 600px) {
+    @include typography(32px, 40px);
+  }
+  @media (min-width: 1024px) {
+    @include typography(36px, 44px);
+  }
+}
+.headline_lg {
+  @include typography(20px, 32px);
+  @media (min-width: 600px) {
+    @include typography(28px, 36px);
+  }
+  @media (min-width: 1024px) {
+    @include typography(32px, 40px);
+  }
+}
+.headline_sm {
+  @include typography(18px, 28px);
+  @media (min-width: 600px) {
+    @include typography(20px, 32px);
+  }
+
+  @media (min-width: 1024px) {
+    @include typography(24px, 36px);
+  }
+}
+
+.title_xl {
+  @include typography(16px, 24px);
+  @media (min-width: 1024px) {
+    @include typography(20px, 32px);
+  }
+}
+.title_lg {
+  @include typography(16px, 24px);
+  @media (min-width: 1024px) {
+    @include typography(18px, 28px);
+  }
+}
+body:dir(ltr) {
+  &,
+  .p-datatable-tbody tr td,
+  .p-datatable-thead tr th {
+    font-family: var(--font-blinker) !important;
+  }
+}
+body:dir(rtl) {
+  &,
+  .p-datatable-tbody tr td,
+  .p-datatable-thead tr th {
+  }
+  font-family: var(--font-cairo) !important;
+}

@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  /* fonts */
+  --font-blinker: "Blinker", sans-serif;
+  --font-cairo: "Cairo", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+
+  /* break poinst */
+  --breakpoint-xs: 500px;
+  /* colors */
+  --color-red-light: #fcf3f3;
+  --color-red-light-hover: #f8e2e2;
+  --color-red-normal: #d21c1c;
+  --color-red-dark: #970c0c;
+
+  --color-orange-100: #fff4f4;
+  --color-orange-300: #ff9407;
+  --color-orange-500: #f24e1e;
+
+  --color-green-500: #0f930f;
+
+  --color-grey-300: #bbbebd;
+  --color-grey-400: #c8c8c891;
+  --color-grey-450: #9a9ba0;
+  --color-grey-500: #5d5d5d;
+  --color-grey-600: #4f4f4f;
+
+  --color-icon: #292d32;
+
+  --color-dark: #212b36;
+
+  --color-main-dark: #1c2b38;
+
+  --color-primary: #393c20;
+  --color-primary-dark: #2e301a;
+  --color-primary-2: #4d5036;
+  --color-primary-3: #61634d;
+  --color-primary-4: #747763;
+  --color-primary-5: #888a79;
+  --color-primary-light: #9c9e90;
+
+  --color-font-light: #ffeedd;
+  --color-main: #f9f5eb;
+
+  --color-secondary-dark: #432202;
+  --color-secondary: #4a2602;
+  --color-secondary-1: #5c3c1b;
+  --color-secondary-2: #6e5135;
+  --color-secondary-3: #80674e;
+  --color-secondary-4: #927d67;
+  --color-secondary-5: #a59381;
+  --color-secondary-light: #a59381;
+
+  --color-light: #fffaf4;
+
+  --color-body: #6e6e6e;
+
+  --color-light: #fffaf4;
+  --color-text-primary: #22303ee5;
+  --color-border: #eeeeee;
+
+  --color-ink-dark: #252a31;
+
+  --color-blue-light: #f1f8fe;
+  --color-blue-normal: #0172cb;
+
+  --color-orange-light: #fef7f1;
+  --color-orange-normal: #df7b00;
+
+  --color-grean-light: #f2f8f2;
+  --color-grean-normal: #28a138;
+  --color-dmv-black: #23262f;
+}
+@layer base {
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    background: var(--color-neutral-200);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary-5);
+  }
+}
+
+@layer utilities {
+  .form_p {
+    @apply px-4 py-14 sm:px-8 md:px-11  lg:p-[54px];
+  }
+  .main_grid {
+    @apply grid gap-6;
+  }
+  .main_p {
+    @apply px-4 py-4 md:py-8 lg:px-6;
+  }
+  .card {
+    @apply bg-secondary-5/10 rounded-lg border-2 border-secondary-5;
+  }
+  .card_p {
+    @apply py-[19px] px-4 2xl:px-10;
+  }
+}

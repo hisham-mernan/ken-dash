@@ -1,0 +1,1 @@
+const a=e=>({cancelled:"error",pending:"warning",delivered:"success"})[e],s=e=>({cancelled:"error",pending:"warning",paid:"success",refuned:"blue"})[e],r=e=>({not_started:"disabled",not_valid:"error",scaned:"success"})[e];export{a,r as b,s as g};

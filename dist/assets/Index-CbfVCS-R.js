@@ -1,0 +1,1 @@
+import{j as t,O as e}from"./index-BlTwmpFd.js";import{P as r}from"./Page_Layout-DFyUMrjm.js";import{P as o}from"./Page_Header-8NtVn9Dc.js";import"./Main_Header-DKzmd6Oz.js";import"./Icon-C3L6rxu-.js";import"./useGetData-cljn8Qte.js";import"./Button-DdVjDzVC.js";const l=()=>t.jsxs(r,{page:"website",children:[t.jsx(o,{title:"website_title"}),t.jsx(e,{})]});export{l as default};

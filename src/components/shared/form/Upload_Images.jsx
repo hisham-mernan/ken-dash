@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { TrashIcon } from "../../../assets/icons/Icon";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const maxFileSizeInMB = import.meta.env.VITE_REACT_APP_IMAGE_SIZE;
 const maxFileSizeInBytes = maxFileSizeInMB * 1024 * 1024;
 const Upload_Images = ({
@@ -209,9 +210,13 @@ const Upload_Images = ({
 const Image_Item = ({ value, onRemove, disabled }) => {
   return (
     <div className="group relative w-[60px] h-[60px]">
-      <img
+      <img loading="lazy" decoding="async"
         alt="image"
-        src={typeof value === "string" ? value : URL?.createObjectURL(value)}
+        src={
+          typeof value === "string"
+            ? getImageUrl(value, { width: IMG.icon })
+            : URL?.createObjectURL(value)
+        }
         className="w-full h-full object-cover rounded-xl"
       />{" "}
       {/* Overlay */}

@@ -5,6 +5,7 @@ import usePaginatedData from "../../hooks/usePaginatedData";
 import { API } from "../../service/apiUrl";
 import Table_Container from "../../components/shared/table/Table_Container";
 import { currentLanguageCode } from "../../utils/switchLang";
+import { getImageUrl, IMG } from "../../utils/getImageUrl";
 import Action from "../../components/shared/table/Action";
 import Button from "../../components/shared/button/Button";
 import { InputSwitch } from "primereact/inputswitch";
@@ -92,8 +93,8 @@ const Product_List = () => {
       body: (item) => (
         <figure className="w-[52px] h-[52px]">
           {item?.image ? (
-            <img
-              src={item?.image}
+            <img loading="lazy" decoding="async"
+              src={getImageUrl(item?.image, { width: IMG.icon })}
               alt="product img"
               className="w-full h-full object-cover"
             />
@@ -176,7 +177,7 @@ const Product_List = () => {
             }  !font-normal`}
             onClick={() => toggleActive(item?.id, item?.is_active)}
           >
-            <img
+            <img loading="lazy" decoding="async"
               alt="active"
               role="button"
               src={item?.is_active ? ToggleOnIcon : ToggleOffIcon}

@@ -28,7 +28,7 @@ const Empty = ({
   };
   return (
     <div className={`${className} h-[50vh] flex_center flex-col gap-2 `}>
-      {src && <img src={src} alt="empty" className={`${imgClassName ?? ""}`} />}
+      {src && <img loading="lazy" decoding="async" src={src} alt="empty" className={`${imgClassName ?? ""}`} />}
       {icon && !hasDefaultIcon && icon}
       {hasDefaultIcon && <NoteIcon fill={style[variant].fill} />}
       <p className={`${sizes[size]}  ${style[variant].text} `}>

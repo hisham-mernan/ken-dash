@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import Action from "../../../../components/shared/table/Action";
+import { getImageUrl, IMG } from "../../../../utils/getImageUrl";
 
 const Website_Item = ({
   data,
@@ -18,8 +19,8 @@ const Website_Item = ({
         className={`flex-1 flex flex-col sm:flex-row gap-3 items-center   w-full max-w-[822px]`}
       >
         {data?.image && (
-          <img
-            src={data?.image}
+          <img loading="lazy" decoding="async"
+            src={getImageUrl(data?.image, { width: IMG.thumb })}
             alt={data?.title}
             className="w-full h-[200px] sm:w-[60px] sm:h-[60px] object-cover rounded-lg"
           />

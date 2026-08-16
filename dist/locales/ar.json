@@ -406,5 +406,10 @@
   "check_in_time": "وقت تسجيل الوصول",
   "start_time": "وقت البدء",
   "end_time": "وقت الانتهاء",
-  "only_cancelled_can_be_refused": "يمكن رفض الحجوزات الملغاة فقط"
+  "only_cancelled_can_be_refused": "يمكن رفض الحجوزات الملغاة فقط",
+  "client_name": "اسم العميل",
+  "client_rate": "تقييم العميل",
+  "client_rating": "تقييم العميل",
+  "regular_night_price": "سعر الليلة العادية",
+  "weekend_night_price": "سعر ليلة نهاية الأسبوع"
 }

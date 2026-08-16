@@ -41,7 +41,7 @@ const Tabs = ({
             {item?.icon ? (
               item?.icon
             ) : (
-              <img
+              <img loading="lazy" decoding="async"
                 src={item?.img}
                 alt="img"
                 className=" w-8 h-8 lg:w-[38px] lg:h-[38px]"

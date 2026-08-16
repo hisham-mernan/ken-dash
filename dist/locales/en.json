@@ -406,5 +406,10 @@
   "check_in_time": "Check in Time",
   "start_time": "Start Time",
   "end_time": "Start Time",
-  "only_cancelled_can_be_refused": "Only cancelled bookings can be refused"
+  "only_cancelled_can_be_refused": "Only cancelled bookings can be refused",
+  "client_name": "client name",
+  "client_rate": "client rate",
+  "client_rating": "Client rating",
+  "regular_night_price": "Regular Night Price",
+  "weekend_night_price": "Weekend Night Price"
 }

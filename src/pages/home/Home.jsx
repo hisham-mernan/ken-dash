@@ -104,7 +104,7 @@ const Home = () => {
                   {t("orders")}
                 </h2>
                 <figure className="flex-1 mb-4 ">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={HomeDountChart}
                     alt="chart"
                     className="h-[186px] w-[186px]"

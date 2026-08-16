@@ -1,6 +1,7 @@
 import { Dropdown } from "primereact/dropdown";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 
 const Icon_Dropdown = ({ item, error, loading, viewOnly, field }) => {
   const { t } = useTranslation();
@@ -15,8 +16,8 @@ const Icon_Dropdown = ({ item, error, loading, viewOnly, field }) => {
 
     return (
       <div className="flex items-center gap-2">
-        <img
-          src={option.image}
+        <img loading="lazy" decoding="async"
+          src={getImageUrl(option.image, { width: IMG.icon })}
           alt={`Icon `}
           className="w-5 h-5 object-contain"
         />

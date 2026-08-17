@@ -1,1 +1,0 @@
-import{j as a}from"./index-BHWP_65K.js";import{M as r}from"./Main_Header-DeENu02q.js";const n=({page:e,children:s,containerClassName:o})=>a.jsxs("section",{className:"main_grid",children:[a.jsx(r,{page:e}),a.jsx("div",{className:`page main_p overflow-x-hidden flex flex-col gap-7 ${o??""} `,children:s})]});export{n as P};

@@ -3,6 +3,20 @@ import { apiKey } from "./apiUrl";
 import { toast } from "react-toastify";
 import { currentLanguageCode } from "../utils/switchLang";
 
+// The API runs on Vercel, whose serverless functions reject request bodies
+// over ~4.5 MB at the edge with a 413 -- before Django runs, so the server
+// cannot report anything useful. Forms here can carry a cover image plus a
+// gallery in one request, so the total matters, not the per-file size.
+const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+
+const totalFileBytes = (formData) => {
+  let total = 0;
+  for (const [, value] of formData.entries()) {
+    if (value instanceof File || value instanceof Blob) total += value.size;
+  }
+  return total;
+};
+
 let onLogout;
 let showExpireTokenToast = false;
 export const setLogoutHandler = (fn) => {
@@ -24,6 +38,22 @@ axiosInstance.interceptors.request.use(
     }
     if (config.data instanceof FormData) {
       config.headers["Content-Type"] = "multipart/form-data";
+
+      // Fail here with a readable message rather than letting the platform
+      // drop the request with a 413 that no layer of ours can explain.
+      const bytes = totalFileBytes(config.data);
+      if (bytes > MAX_UPLOAD_BYTES) {
+        const mb = (bytes / 1024 / 1024).toFixed(1);
+        const limit = MAX_UPLOAD_BYTES / 1024 / 1024;
+        toast.error(
+          currentLanguageCode === "en"
+            ? `These files total ${mb} MB, over the ${limit} MB upload limit. Please upload fewer images at a time.`
+            : `حجم الملفات ${mb} ميجابايت، وهو أكبر من الحد المسموح ${limit} ميجابايت. الرجاء رفع عدد أقل من الصور في المرة الواحدة.`
+        );
+        return Promise.reject(
+          new axios.Cancel(`Upload too large: ${mb} MB > ${limit} MB`)
+        );
+      }
     }
     return config;
   },
@@ -35,6 +65,17 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    // A 413 is raised by Vercel before Django sees the request, so it carries
+    // no API error body. Without this it surfaces as a silent failure.
+    if (error?.response?.status === 413) {
+      toast.error(
+        currentLanguageCode === "en"
+          ? "The upload was rejected for being too large. Please upload fewer or smaller images."
+          : "تم رفض الرفع لأن حجمه كبير جدًا. الرجاء رفع صور أقل أو أصغر حجمًا."
+      );
+      return Promise.reject(error);
+    }
+
     const detail =
       error?.response?.code ||
       error?.response?.data?.error ||

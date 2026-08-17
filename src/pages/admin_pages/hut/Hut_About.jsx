@@ -6,6 +6,7 @@ import Form from "../../../components/shared/form/Form";
 import Form_Actions_Btn from "../../../components/shared/button/Form_Actions_Btn";
 import { activeStatusList, hutSize } from "../../../constant/list";
 import { handleErrors } from "../../../utils/handleError";
+import { hasNewFile } from "../../../utils/hasNewFile";
 import axiosInstance from "../../../service/axiosInstance";
 import { API } from "../../../service/apiUrl";
 import { toast } from "react-toastify";
@@ -340,7 +341,10 @@ const Hut_About = () => {
 
   //__________________function ___________
   const onSubmit = async (data) => {
-    if (isDirty || !isEdit) {
+    // A newly picked image does not reliably flip isDirty, and the else branch
+    // below navigates away without sending anything -- which looks exactly
+    // like a successful save while silently discarding the upload.
+    if (isDirty || !isEdit || hasNewFile(data)) {
       try {
         setLoading(true);
         const endpoint = isEdit

@@ -1,0 +1,1 @@
+const a=e=>typeof File<"u"&&e instanceof File,s=e=>a(e)?!0:Array.isArray(e)?e.some(s):e&&typeof e=="object"?a(e.image):!1,t=e=>!!e&&Object.values(e).some(s),i=[{name:"active",value:!0},{name:"disabled",value:!1}],n=[{name:"small",value:"small"},{name:"medium",value:"meduim"},{name:"large",value:"large"}];export{i as a,n as b,t as h};

@@ -7,6 +7,7 @@ import Form from "../../components/shared/form/Form";
 import { API } from "../../service/apiUrl";
 import axiosInstance from "../../service/axiosInstance";
 import { handleErrors } from "../../utils/handleError";
+import { hasNewFile } from "../../utils/hasNewFile";
 import useGetData from "../../hooks/useGetData";
 import { currentLanguageCode } from "../../utils/switchLang";
 import { toast } from "react-toastify";
@@ -211,7 +212,10 @@ const About_Event = () => {
   ];
   //__________________function ___________
   const onSubmit = async (data) => {
-    if (isDirty || !isEdit) {
+    // A newly picked image does not reliably flip isDirty, and the else branch
+    // navigates away without sending anything -- which looks like a successful
+    // save while silently discarding the upload.
+    if (isDirty || !isEdit || hasNewFile(data)) {
       try {
         setLoading(true);
         const endpoint = isEdit

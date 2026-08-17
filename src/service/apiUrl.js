@@ -23,7 +23,13 @@ export const API = {
     hut: {
       list: "/api/products/huts/admin-list/",
       create: "/api/products/huts/",
-      update: "/api/products/huts/",
+      // Must be the admin detail view, not /huts/<id>/. That one is served by
+      // HutSerializer, where main_image is a SerializerMethodField and so is
+      // read-only: DRF silently drops it, saves everything else and returns
+      // 200, leaving the image unchanged with no error anywhere. The admin
+      // view also handles the "location." keys and the images gallery that
+      // this form sends.
+      update: "/api/products/huts-details-admin/",
       hut: "/api/products/huts-details-admin/",
       prices: "/api/products/huts/available-dates/",
       details: "/api/products/admin/huts/services-activities/",

@@ -1,1 +1,0 @@
-import{j as s,O as r}from"./index-DlAFDU0h.js";import{M as i}from"./Main_Header-C4Gf9XK9.js";import"./Icon-1bVOjkOm.js";import"./useGetData-DXUoz3f5.js";const n=()=>{const e=!!location.pathname.includes("supplier");return s.jsxs("div",{className:"main_grid",children:[s.jsx(i,{page:e?"supplier":"users"}),s.jsx(r,{})]})};export{n as default};

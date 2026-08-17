@@ -3,8 +3,15 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { TrashIcon } from "../../../assets/icons/Icon";
 import { getImageUrl, IMG } from "../../../utils/getImageUrl";
+import { compressImage } from "../../../utils/compressImage";
 const maxFileSizeInMB = import.meta.env.VITE_REACT_APP_IMAGE_SIZE;
 const maxFileSizeInBytes = maxFileSizeInMB * 1024 * 1024;
+
+// The API runs on Vercel, which rejects request bodies over ~4.5 MB at the
+// edge with a 413 -- before Django sees them. Files are downscaled below this
+// first; anything still over it after compression is refused here rather than
+// failing invisibly mid-upload.
+const HARD_UPLOAD_LIMIT_BYTES = 4 * 1024 * 1024;
 const Upload_Images = ({
   field,
   setError,
@@ -21,7 +28,7 @@ const Upload_Images = ({
   const isMultiple = item?.isMultiple ? true : false;
   const limit = item?.limit || 10;
 
-  const handleFileChange = (newFiles, e) => {
+  const handleFileChange = async (newFiles, e) => {
     if (isMultiple) {
       const files = Array.from(newFiles);
       const existingImages = value || [];
@@ -42,18 +49,26 @@ const Upload_Images = ({
       const filesToProcess = files.slice(0, emptySlots);
       const newImages = [];
 
-      filesToProcess.forEach((file, idx) => {
-        if (!validTypes.includes(file.type)) {
+      for (let idx = 0; idx < filesToProcess.length; idx++) {
+        const original = filesToProcess[idx];
+        if (!validTypes.includes(original.type)) {
           toast.error(t("error_image_type"));
-          return;
+          continue;
         }
 
         // Validate size
-        if (file.size > maxFileSizeInBytes) {
+        if (original.size > maxFileSizeInBytes) {
           toast.error(
-            `${file.name} - ${t("exceed_limit")} ${maxFileSizeInMB} MB`
+            `${original.name} - ${t("exceed_limit")} ${maxFileSizeInMB} MB`
           );
-          return;
+          continue;
+        }
+
+        // Downscale before upload -- the API rejects anything much over 4 MB.
+        const file = await compressImage(original);
+        if (file.size > HARD_UPLOAD_LIMIT_BYTES) {
+          toast.error(`${original.name} - ${t("exceed_limit")} 4 MB`);
+          continue;
         }
 
         // truncate name
@@ -72,7 +87,7 @@ const Upload_Images = ({
           image: finalFile,
           preview: URL.createObjectURL(finalFile),
         });
-      });
+      }
 
       const updatedImages = [...existingImages];
 
@@ -94,8 +109,8 @@ const Upload_Images = ({
       setImg(updatedImages);
       handleChange(updatedImages);
     } else {
-      let file = newFiles[0];
-      if (!validTypes.includes(file.type)) {
+      const original = newFiles[0];
+      if (!validTypes.includes(original.type)) {
         toast.error(t("error_image_type"));
         setError(field, {
           type: "manual",
@@ -103,16 +118,30 @@ const Upload_Images = ({
         });
         return;
       }
-      if (file.size > maxFileSizeInBytes) {
+      if (original.size > maxFileSizeInBytes) {
         toast.error(
-          `${file?.name} - ${t("exceed_limit")} ${maxFileSizeInMB} MB`
+          `${original?.name} - ${t("exceed_limit")} ${maxFileSizeInMB} MB`
         );
         setError(field, {
           type: "manual",
-          message: `${file?.name} - ${t("exceed_limit")} ${maxFileSizeInMB} MB`,
+          message: `${original?.name} - ${t(
+            "exceed_limit"
+          )} ${maxFileSizeInMB} MB`,
         });
         return;
       }
+
+      // Downscale before upload -- the API rejects anything much over 4 MB.
+      const file = await compressImage(original);
+      if (file.size > HARD_UPLOAD_LIMIT_BYTES) {
+        toast.error(`${original?.name} - ${t("exceed_limit")} 4 MB`);
+        setError(field, {
+          type: "manual",
+          message: `${original?.name} - ${t("exceed_limit")} 4 MB`,
+        });
+        return;
+      }
+
       setImg(URL?.createObjectURL(file));
       handleChange(file);
     }

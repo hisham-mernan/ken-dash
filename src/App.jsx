@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { SHOW_EVENTS, SHOW_PRODUCTS } from "./config/features";
 import React, { lazy, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { currentLanguageCode, switchLang } from "./utils/switchLang";
@@ -109,11 +110,14 @@ const App = () => {
               }
             />
 
-            <Route path="product">
-              <Route index element={<Product_List />} />
-              <Route path="create" element={<Product_Managment />} />
-              <Route path=":id/edit" element={<Product_Managment />} />
-            </Route>
+            {/* Hidden for now; the pages remain so this is one flag to undo. */}
+            {SHOW_PRODUCTS && (
+              <Route path="product">
+                <Route index element={<Product_List />} />
+                <Route path="create" element={<Product_Managment />} />
+                <Route path=":id/edit" element={<Product_Managment />} />
+              </Route>
+            )}
             <Route path="orders">
               <Route index element={<Order_List />} />
               <Route path=":id/details" element={<Order_Details />} />
@@ -122,18 +126,20 @@ const App = () => {
             {/* billing */}
             <Route path="bill" element={<Bill_List />} />
             {/* events */}
-            <Route path="event">
-              <Route index element={<Event_List />} />
-              <Route element={<Event_Container />}>
-                <Route path="about" element={<Event_About />} />
-                <Route path=":id/about" element={<Event_About />} />
-                <Route path=":id/details" element={<Event_Details />} />
-                <Route
-                  path=":id/price-and-date"
-                  element={<Event_Price_And_Date />}
-                />
+            {SHOW_EVENTS && (
+              <Route path="event">
+                <Route index element={<Event_List />} />
+                <Route element={<Event_Container />}>
+                  <Route path="about" element={<Event_About />} />
+                  <Route path=":id/about" element={<Event_About />} />
+                  <Route path=":id/details" element={<Event_Details />} />
+                  <Route
+                    path=":id/price-and-date"
+                    element={<Event_Price_And_Date />}
+                  />
+                </Route>
               </Route>
-            </Route>
+            )}
 
             {/* support */}
             <Route path="support">

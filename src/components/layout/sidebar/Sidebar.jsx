@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  SHOW_EVENTS,
+  SHOW_PRODUCTS,
+  SHOW_SPECIAL_ITEMS,
+} from "../../../config/features";
 // lib
 import { useTranslation } from "react-i18next";
 
@@ -84,12 +89,14 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
       title: "events",
       path: "event",
       icon: <EventIcon />,
+      hidden: !SHOW_EVENTS,
     },
     {
       id: 8,
       title: "special_items",
       path: "/admin/special-items",
       icon: <SpecialItemsIcon />,
+      hidden: !SHOW_SPECIAL_ITEMS,
     },
     {
       id: 7,
@@ -128,12 +135,14 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
       title: "products",
       path: "/product",
       icon: <PackageIcon />,
+      hidden: !SHOW_PRODUCTS,
     },
     {
       id: 5,
       title: "events",
       path: "event",
       icon: <EventIcon />,
+      hidden: !SHOW_EVENTS,
     },
     {
       id: 1,
@@ -154,7 +163,9 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
       icon: <SupportIcon />,
     },
   ];
-  const sidebarList = isAdmin ? adminList : supplierList;
+  const sidebarList = (isAdmin ? adminList : supplierList).filter(
+    (item) => !item.hidden
+  );
   return (
     <div
       className={`sidebar  ${

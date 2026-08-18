@@ -1,4 +1,5 @@
 import React, { lazy } from "react";
+import { SHOW_PRODUCTS, SHOW_SPECIAL_ITEMS } from "../config/features";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 // _________________________ admin route _____________________-
@@ -115,18 +116,22 @@ const Admin_Routes = () => {
           <Route path=":id/prices" element={<Hut_Price />} />
         </Route>
       </Route>
-      {/* Special items */}
-      <Route path="special-items">
-        <Route index element={<Ken_Special_Items_List />} />
-        <Route path="create" element={<Ken_Special_Items_Managment />} />
-        <Route path=":id/edit" element={<Ken_Special_Items_Managment />} />
+      {/* Special items -- hidden for now; one flag to bring back. */}
+      {SHOW_SPECIAL_ITEMS && (
+        <Route path="special-items">
+          <Route index element={<Ken_Special_Items_List />} />
+          <Route path="create" element={<Ken_Special_Items_Managment />} />
+          <Route path=":id/edit" element={<Ken_Special_Items_Managment />} />
 
-        <Route path="product">
-          <Route index element={<Product_List />} />
-          <Route path="create" element={<Product_Managment />} />
-          <Route path=":id/edit" element={<Product_Managment />} />
+          {SHOW_PRODUCTS && (
+            <Route path="product">
+              <Route index element={<Product_List />} />
+              <Route path="create" element={<Product_Managment />} />
+              <Route path=":id/edit" element={<Product_Managment />} />
+            </Route>
+          )}
         </Route>
-      </Route>
+      )}
       {/* qr */}
       <Route path="qr">
         <Route index element={<Admin_Qr_List />} />

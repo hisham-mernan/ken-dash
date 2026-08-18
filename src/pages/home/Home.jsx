@@ -1,4 +1,5 @@
 import React from "react";
+import { SHOW_EVENTS, SHOW_PRODUCTS } from "../../config/features";
 
 import { useTranslation } from "react-i18next";
 import {
@@ -63,16 +64,20 @@ const Home = () => {
       value: cardData?.services_count
         ? formatNumber(cardData?.services_count)
         : 0,
+      hidden: !SHOW_PRODUCTS,
     },
     {
       icon: <AvalibleEventtIcon />,
       title: "avalible_events",
       value: cardData?.events_count ? formatNumber(cardData?.events_count) : 0,
       sub: `${t("events")}`,
+      hidden: !SHOW_EVENTS,
     },
   ];
 
-  const list = isAdmin ? adminStatList : supplierStatList;
+  const list = (isAdmin ? adminStatList : supplierStatList).filter(
+    (item) => !item.hidden
+  );
 
   return (
     <Page_Layout>

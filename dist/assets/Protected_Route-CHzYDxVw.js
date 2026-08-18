@@ -1,0 +1,1 @@
+import{u as s,g as l,l as r}from"./index-CqIv9s1-.js";const u=["supplier","admin"],i=({role:e,children:t})=>{const{token:n}=s(),o=l();return!n||e&&u.includes(e)&&o!==e?(window.location.href=`${r}login`,null):t};export{i as default};

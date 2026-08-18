@@ -1,1 +1,0 @@
-import{j as t}from"./index-BDa_HBti.js";import{W as e}from"./Website_Navigation_Item-BHjvZkvj.js";import"./Button-CrNZQnRY.js";import"./Icon-bkQ0nolP.js";const o=[{title:"terms_description",to:"overview"},{title:"terms",to:"terms"}],a=()=>t.jsx(e,{list:o});export{a as default};

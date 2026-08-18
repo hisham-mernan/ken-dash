@@ -18,6 +18,8 @@ const Hut_About = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [loadingData, setLoadingData] = useState(false);
+  // Ids present when the form loaded, so submit can work out what was removed.
+  const [originalImageIds, setOriginalImageIds] = useState([]);
   // ___________ useform _________
   const {
     control,
@@ -385,6 +387,18 @@ const Hut_About = () => {
         //   console.log(`${key}:`, value);
         // }
 
+        // Anything that was in the hut when the form loaded but is no longer
+        // in the field was removed by the user. Without telling the server,
+        // the deletion only ever existed in the browser.
+        if (isEdit) {
+          const remaining = (data?.images ?? [])
+            .map((img) => img?.id)
+            .filter(Boolean);
+          originalImageIds
+            .filter((imgId) => !remaining.includes(imgId))
+            .forEach((imgId) => formData.append("delete_images", imgId));
+        }
+
         const response = await axiosInstance[method](endpoint, formData);
 
         const message = isEdit
@@ -419,6 +433,10 @@ const Hut_About = () => {
         if (address_ar)
           setValue("address_ar", address_ar, { shouldDirty: false });
       }
+
+      setOriginalImageIds(
+        (data?.images ?? []).map((img) => img?.id).filter(Boolean)
+      );
 
       Object.entries(data).forEach(([key, value]) => {
         if (key !== "location") {

@@ -1,1 +1,0 @@
-import{c as m}from"./index-BDa_HBti.js";function u(o,n){const t=new Date(o),r={day:"2-digit",month:"short",year:"numeric"},a={hour:"numeric",minute:"2-digit",hour12:!0},i=m==="en"?"en-US":"ar-EG",e=t.toLocaleDateString(i,r);if(n!=="date_only"){const c=t.toLocaleTimeString("en-US",a).replace(" ","");return`${e}, ${c}`}else return e}export{u as f};

@@ -1,0 +1,1 @@
+import{j as r}from"./index-CCRgvptt.js";import{F as o,v as e}from"./Icon-5F9E-9tB.js";const m=({rate:a=0,maxStars:t=5})=>r.jsx("div",{className:"flex  gap-2.5",children:Array.from({length:t},(n,s)=>r.jsx("div",{children:a>=s+1?r.jsx(o,{}):r.jsx(e,{})},s))});export{m as R};

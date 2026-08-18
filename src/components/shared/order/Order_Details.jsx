@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import {
+  SHOW_EVENTS,
+  SHOW_PRODUCTS,
+  SHOW_SPECIAL_ITEMS,
+} from "../../../config/features";
 import { API } from "../../../service/apiUrl";
 import useGetData from "../../../hooks/useGetData";
 import { useTranslation } from "react-i18next";
@@ -110,6 +115,17 @@ const Order_Details = () => {
       ),
     },
   ];
+  // Events, services and special items are hidden project-wide. They share
+  // these tables with the hut row, which must stay -- it is the booking
+  // itself -- so filter by row type instead of hiding the section.
+  const visibleRows = (rows) =>
+    (rows || []).filter((row) => {
+      if (row?.type === "event") return SHOW_EVENTS;
+      if (row?.type === "service") return SHOW_PRODUCTS;
+      if (row?.type === "special_item") return SHOW_SPECIAL_ITEMS;
+      return true;
+    });
+
   const columns = [
     { field: "id", header: "serial_number" },
     {
@@ -220,7 +236,11 @@ const Order_Details = () => {
             <div className="page p-4 flex flex-col gap-6">
               <Page_Header
                 title={
-                  role === "admin" ? "event_service_details" : "service_details"
+                  SHOW_EVENTS || SHOW_PRODUCTS
+                    ? role === "admin"
+                      ? "event_service_details"
+                      : "service_details"
+                    : "order_details"
                 }
               />{" "}
               <Table_Container
@@ -231,20 +251,20 @@ const Order_Details = () => {
                 }
                 columns={columns}
                 loading={loading}
-                data={data?.main_order}
+                data={visibleRows(data?.main_order)}
                 hasFilter={false}
                 hasPagination={false}
               />
             </div>
             {/* will show if has any extra service or days */}
-            {data?.extra_order?.length > 0 && (
+            {visibleRows(data?.extra_order).length > 0 && (
               <div className="page p-4 flex flex-col gap-6">
                 <Page_Header title="types_of_extension" />{" "}
                 <Table_Container
                   emptyText="no_extension_yet"
                   columns={columns}
                   loading={loading}
-                  data={data?.extra_order}
+                  data={visibleRows(data?.extra_order)}
                   hasFilter={false}
                   hasPagination={false}
                 />
